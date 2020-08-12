@@ -8,13 +8,13 @@ class SmsServiceProvider extends ServiceProvider {
     {
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
 
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'sms');
+        // $this->loadViewsFrom(__DIR__.'/resources/views', 'sms');
 
         $this->loadMigrationsFrom(__DIR__.'/Database/migrations');
 
-        $this->publishes([
-            __DIR__ . '/../public' => public_path('vendor/sms'),
-        ], 'sms-auth');
+        // $this->publishes([
+        //     __DIR__ . '/../public' => public_path('vendor/sms'),
+        // ], 'sms-auth');
     }
 
     public function register()
