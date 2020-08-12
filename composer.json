@@ -1,0 +1,16 @@
+{
+    "name": "codificar/sms-auth",
+    "description": "Permite cadastro e login via sms",
+    "authors": [{
+        "name": "Álvaro Tavares",
+        "email": "libs@codificar.com.br"
+    }],
+    "require": {
+        "matthewbdaly/laravel-sms": "^1.0"
+     },
+    "autoload": {
+        "psr-4": {
+            "Codificar\\Sms\\": "src/"
+        }
+    }
+}
