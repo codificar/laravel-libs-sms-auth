@@ -12,10 +12,10 @@ Permite cadastro e login via sms
     {
         "type": "package",
         "package": {
-            "name": "codificar/laravel-themes",
+            "name": "codificar/sms-auth",
             "version": "1.0.1",
             "source": {
-                "url": "https://libs:ofImhksJ@git.codificar.com.br/laravel-libs/laravel-themes.git",
+                "url": "https://libs:ofImhksJ@git.codificar.com.br/laravel-libs/sms-auth.git",
                 "type": "git",
                 "reference": "1.0.1"
             }
@@ -27,7 +27,7 @@ Permite cadastro e login via sms
 
 "require": {
     // ADD this
-    "codificar/laravel-themes": "dev-master",
+    "codificar/sms-auth": "dev-master",
 },
 
 ```
@@ -41,14 +41,14 @@ Permite cadastro e login via sms
         ],
         "psr-4": {
             // Add your Lib here
-			"Codificar\\Themes\\": "vendor/codificar/laravel-themes/src",
+			"Codificar\\Sms\\": "vendor/codificar/sms-auth/src",
             "App\\": "app/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             // Add your Lib here
-			"Codificar\\Themes\\": "vendor/codificar/laravel-themes/src",
+			"Codificar\\Sms\\": "vendor/codificar/sms-auth/src",
             "Tests\\": "tests/"
         }
     },
@@ -65,7 +65,7 @@ composer dump-autoload -o
 'providers' => [
          ...,
             // The new package class
-            Codificar\Themes\ThemeServiceProvider::class
+            Codificar\Sms\SmsServiceProvider::class
         ],
 ```
 

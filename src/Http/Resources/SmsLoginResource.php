@@ -6,6 +6,15 @@ use api\v1\ProviderLoginController;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 
+/**
+ * Class SmsLoginResource
+ *
+ * @package sms-auth
+ *
+ * @author  Álvaro Oliveira <alvaro.oliveira@codificar.com.br>
+ *
+ * @OA\Schema(ref="#/components/schemas/ProviderLoginResource")
+ */
 class SmsLoginResource extends JsonResource
 {
 	/**
