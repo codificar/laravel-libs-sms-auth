@@ -13,9 +13,9 @@ use Codificar\Sms\Models\SmsCode;
 class SmsController extends Controller
 {
 	/**
-	 * Cria um código e o envia para o número informado, que poderá ser usado para login ou cadastro
-	 * @param phone O telefone
-	 * @return provider_id
+	 * Creates a code and sends it to the number entered, which can be used for login or registration
+	 * @param RequestSmsLoginFormRequest $request
+	 * @return RequestSmsLoginResource
 	 */
 	public function requestLogin(RequestSmsLoginFormRequest $request)
 	{
@@ -26,17 +26,20 @@ class SmsController extends Controller
 	}
 
 	/**
-	 * Compara o códido enviado com o código recebido e faz login
-	 * @param code
-	 * @param provider_id
-	 * @return ProviderLoginController
+	 * Compares the code sent with the code received and log in
+	 * @param SmsLoginFormRequest $request
+	 * @return SmsLoginResource
 	 */
 	public function login(SmsLoginFormRequest $request)
 	{
 		return new SmsLoginResource(['request' => $request]);
 	}
 
-	//Envia o código
+	/**
+	 * Send a code to phone
+	 * @param string $phone
+	 * @param int    $code  5 digit code
+	 */
 	private function send($phone, $code)
 	{
 		if(env('SMS_DRIVER') == 'twillo'){

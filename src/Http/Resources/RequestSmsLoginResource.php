@@ -15,7 +15,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @OA\Schema(
  *     schema="RequestSmsLoginResource",
  *     type="object",
- *     description="Resposta da requisição de login sms",
+ *     description="Login SMS response",
  *     title="Request Sms Login Resource",
  *     allOf={
  *       @OA\Schema(ref="#/components/schemas/RequestSmsLoginResource"),
