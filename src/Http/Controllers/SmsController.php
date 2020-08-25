@@ -12,6 +12,11 @@ use Codificar\Sms\Models\SmsCode;
 
 class SmsController extends Controller
 {
+	/**
+	 * Cria um código e o envia para o número informado, que poderá ser usado para login ou cadastro
+	 * @param phone O telefone
+	 * @return provider_id
+	 */
 	public function requestLogin(RequestSmsLoginFormRequest $request)
 	{
 		$code = SmsCode::makeSmsCode($request->phone);
@@ -20,11 +25,18 @@ class SmsController extends Controller
 		return new RequestSmsLoginResource(['provider' => $request->provider]);
 	}
 
+	/**
+	 * Compara o códido enviado com o código recebido e faz login
+	 * @param code
+	 * @param provider_id
+	 * @return ProviderLoginController
+	 */
 	public function login(SmsLoginFormRequest $request)
 	{
 		return new SmsLoginResource(['request' => $request]);
 	}
 
+	//Envia o código
 	private function send($phone, $code)
 	{
 		if(env('SMS_DRIVER') == 'twillo'){
