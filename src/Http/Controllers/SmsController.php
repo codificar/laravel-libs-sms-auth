@@ -42,7 +42,7 @@ class SmsController extends Controller
 	 */
 	private function send($phone, $code)
 	{
-		if(env('SMS_DRIVER') == 'twillo'){
+		if(env('SMS_DRIVER') == 'twilio'){
 			sendTwilloSms($phone, $code);
 		} else {
 			$msg = [
