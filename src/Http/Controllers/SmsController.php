@@ -20,7 +20,7 @@ class SmsController extends Controller
 	public function requestLogin(RequestSmsLoginFormRequest $request)
 	{
 		$code = SmsCode::makeSmsCode($request->phone);
-		$this->send($request->phone, $code);
+		$this->send($request->phone, "Seu código: " . $code);
 
 		return new RequestSmsLoginResource(['provider' => $request->provider]);
 	}
@@ -42,14 +42,14 @@ class SmsController extends Controller
 	 */
 	private function send($phone, $code)
 	{
-		if(env('SMS_DRIVER') == 'twilio'){
+		// if(env('SMS_DRIVER') == 'twilio'){
 			sendTwilloSms($phone, $code);
-		} else {
-			$msg = [
-				'to'      => $phone,
-				'content' => $code,
-			];
-			SMS::send($msg);
-		}
+		// } else {
+		// 	$msg = [
+		// 		'to'      => $phone,
+		// 		'content' => $code,
+		// 	];
+		// 	SMS::send($msg);
+		// }
 	}
 }
