@@ -27,7 +27,7 @@ class SmsLoginResource extends JsonResource
 	{
 		$formRequest = $this['request'];
 		if ($formRequest->sms_code->validate($formRequest->code)) {
-			return ProviderLoginController::validateLogin($formRequest);
+			return ProviderLoginController::validateLogin($formRequest, true);
 		} else {
 			return [
 				'success' => false,
