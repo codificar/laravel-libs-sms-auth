@@ -19,6 +19,10 @@ class CreateSmsCodesTable extends Migration
 			$table->string('code');
 			$table->integer('code_expiry');
 		});
+
+		Schema::table('provider', function (Blueprint $table) {
+			$table->boolean('phone_verified')->after('phone')->default(false);
+		});
 	}
 
 	/**
@@ -29,5 +33,8 @@ class CreateSmsCodesTable extends Migration
 	public function down()
 	{
 		Schema::dropIfExists('sms_code');
+		Schema::table('provider', function (Blueprint $table) {
+			$table->dropColumn('phone_verified');
+		});
 	}
 }

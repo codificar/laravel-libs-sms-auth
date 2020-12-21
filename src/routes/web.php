@@ -2,7 +2,7 @@
 
 //Rota de tema personalizado
 
-use Codificar\Sms\SmsController;
+use Codificar\Sms\Http\Controllers\SmsController;
 
 
 Route::group(['prefix' => '/api/v1/sms'], function () {

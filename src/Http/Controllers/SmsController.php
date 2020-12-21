@@ -1,6 +1,6 @@
 <?php
 
-namespace Codificar\Sms;
+namespace Codificar\Sms\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Codificar\Sms\Http\Requests\RequestSmsLoginFormRequest;
