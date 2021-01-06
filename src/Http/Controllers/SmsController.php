@@ -9,6 +9,7 @@ use Codificar\Sms\Http\Resources\SmsLoginResource;
 use Codificar\Sms\Http\Resources\RequestSmsLoginResource;
 use SMS;
 use Codificar\Sms\Models\SmsCode;
+use Settings;
 
 class SmsController extends Controller
 {
@@ -20,7 +21,8 @@ class SmsController extends Controller
 	public function requestLogin(RequestSmsLoginFormRequest $request)
 	{
 		$code = SmsCode::makeSmsCode($request->phone);
-		$this->send($request->phone, "Seu código: " . $code);
+		$project_name = Settings::findByKey("website_title");
+		$this->send($request->phone, "Seu código " . $project_name . ": " . $code);
 
 		return new RequestSmsLoginResource(['provider' => $request->provider]);
 	}
