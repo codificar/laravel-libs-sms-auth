@@ -13,11 +13,11 @@ Permite cadastro e login via sms
         "type": "package",
         "package": {
             "name": "codificar/sms-auth",
-            "version": "1.0.1",
+            "version": "1.0.3",
             "source": {
                 "url": "https://libs:ofImhksJ@git.codificar.com.br/laravel-libs/sms-auth.git",
                 "type": "git",
-                "reference": "1.0.1"
+                "reference": "1.0.3"
             }
         }
     }
@@ -32,7 +32,7 @@ Permite cadastro e login via sms
 
 ```
 
-- Add 
+- Add
 ```
 
 "autoload": {
@@ -71,4 +71,4 @@ composer dump-autoload -o
 
 # Observações
 - Assume-se que existe o helper is_token_active
-- Assume-se que existe o método api\v1\ProviderLoginController@validateLogin() (ver uberfretes)
+- Assume-se que existe o helper login_helper (ver fretes)
