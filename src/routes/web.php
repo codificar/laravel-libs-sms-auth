@@ -58,4 +58,7 @@ Route::group(['prefix' => '/api/v1/sms'], function () {
 	 * )
 	 */
 	Route::get('login', SmsController::class . '@login');
+
+	Route::post('request_sms_code_for_user', array('as' => 'RequestSmsCodeForUser', 'uses' => 'Codificar\Sms\Http\Controllers\SmsController@requestSmsCodeForUser'));
+	Route::post('user_login_by_sms_code', array('as' => 'UserLoginBySmsCode', 'uses' => 'Codificar\Sms\Http\Controllers\SmsController@userLogin'));
 });

@@ -3,10 +3,20 @@
 namespace Codificar\Sms\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+
+//Requests
 use Codificar\Sms\Http\Requests\RequestSmsLoginFormRequest;
 use Codificar\Sms\Http\Requests\SmsLoginFormRequest;
+use Codificar\Sms\Http\Requests\RequestSmsCodeForUserFormRequest;
+use Codificar\Sms\Http\Requests\UserLoginBySmsFormRequest;
+
+// Resources
 use Codificar\Sms\Http\Resources\SmsLoginResource;
 use Codificar\Sms\Http\Resources\RequestSmsLoginResource;
+use Codificar\Sms\Http\Resources\LoginBySmsForUserResource;
+use Codificar\Sms\Http\Resources\SmsCodeForUserResource;
+
+
 use SMS;
 use Codificar\Sms\Models\SmsCode;
 use Settings;
@@ -53,5 +63,17 @@ class SmsController extends Controller
 		// 	];
 		// 	SMS::send($msg);
 		// }
+	}
+
+	public function userLogin(UserLoginBySmsFormRequest $request) {
+		return new LoginBySmsForUserResource(['request' => $request]);
+	}
+
+	public function requestSmsCodeForUser(RequestSmsCodeForUserFormRequest $request) {		
+		$code = SmsCode::makeSmsCode($request->phone);
+		$project_name = Settings::findByKey("website_title");
+		$this->send($request->phone, "Seu código " . $project_name . ": " . $code);
+
+		return new SmsCodeForUserResource(['user' => $request->user]);
 	}
 }
