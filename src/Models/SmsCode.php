@@ -25,7 +25,10 @@ class SmsCode extends Model
 
 	public static function getByPhone($phone)
 	{
-		return self::where('phone', 'like', $phone)->first();
+		return self::where('phone', 'like', $phone)
+			->orWhere('phone', 'like', str_ireplace('+55', '', $phone))
+			->orWhere('phone', 'like', '%'.$phone)
+			->first();
 	}
 
 	public function validate($code)
