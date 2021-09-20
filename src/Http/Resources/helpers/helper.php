@@ -1,7 +1,11 @@
 <?php
 
+namespace Codificar\Sms\Http\Resources\helpers;
+
 use Codificar\Sms\Models\SmsCode;
 use Illuminate\Support\Facades\Hash;
+
+use Codificar\Sms\Http\Resources\RequestSmsLoginResource;
 
 function clean($string)
 {
@@ -40,5 +44,5 @@ function login_helper($request, $valid_sms = false)
 
     $provider->save();
 
-    return new Codificar\Sms\Http\Resources\RequestSmsLoginResource($provider);
+    return new RequestSmsLoginResource($provider);
 }
