@@ -16,7 +16,7 @@ function generate_token()
     return clean(Hash::make(rand() . time() . rand()));
 }
 
-function provider_login_helper($request, $valid_sms = false)
+function login_helper($request, $valid_sms = false)
 {
     //pega os dados padroes
     $provider = $request->provider;
