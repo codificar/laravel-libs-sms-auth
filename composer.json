@@ -6,7 +6,8 @@
         "email": "libs@codificar.com.br"
     }],
     "require": {
-        "matthewbdaly/laravel-sms": "^1.0"
+        "matthewbdaly/laravel-sms": "^1.0",
+        "twilio/sdk": "^6.28"
      },
     "autoload": {
         "psr-4": {
