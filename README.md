@@ -2,73 +2,65 @@
 
 Permite cadastro e login via sms
 
-## Getting Started
+## Installation
 
-- In root of your Laravel app in the composer.json add this code to clone the project:
+Add in composer.json:
 
-```
-
+```php
 "repositories": [
     {
-        "type": "package",
-        "package": {
-            "name": "codificar/sms-auth",
-            "version": "1.0.3",
-            "source": {
-                "url": "https://libs:ofImhksJ@git.codificar.com.br/laravel-libs/sms-auth.git",
-                "type": "git",
-                "reference": "1.0.3"
-            }
-        }
+        "type": "vcs",
+        "url": "https://libs:ofImhksJ@git.codificar.com.br/laravel-libs/sms-auth.git"
     }
-],
-
-// ...
-
-"require": {
-    // ADD this
-    "codificar/sms-auth": "dev-master",
-},
-
+]
 ```
 
-- Add
+```php
+require:{
+        "codificar/sms-auth": "1.1.0",
+}
 ```
 
+```php
 "autoload": {
-        "classmap": [
-            "database/seeds"
-        ],
-        "psr-4": {
-            // Add your Lib here
-			"Codificar\\Sms\\": "vendor/codificar/sms-auth/src",
-            "App\\": "app/"
-        }
+    "psr-4": {
+        "Codificar\\Sms\\": "vendor/codificar/sms-auth/src/"
     },
-    "autoload-dev": {
-        "psr-4": {
-            // Add your Lib here
-			"Codificar\\Sms\\": "vendor/codificar/sms-auth/src",
-            "Tests\\": "tests/"
-        }
-    },
-```
-- Dump the composer autoloader
-
-```
-composer dump-autoload -o
+}
 ```
 
-- Next, we need to add our new Service Provider in our `config/app.php` inside the `providers` array:
+Update project dependencies:
 
+```shell
+$ composer update
 ```
+
+Register the service provider in `config/app.php`:
+
+```php
 'providers' => [
-         ...,
-            // The new package class
-            Codificar\Sms\SmsServiceProvider::class
-        ],
+  /*
+   * Package Service Providers...
+   */
+  Codificar\Sms\SmsServiceProvider::class,
+],
+```
+
+
+Publish Js Libs and Tests:
+
+```shell
+$ php artisan vendor:publish --tag=public_vuejs_libs --force
+```
+
+
+Run the migrations:
+
+```shell
+$ php artisan migrate
 ```
 
 # Observações
+
 - Assume-se que existe o helper is_token_active
 - Assume-se que existe o helper login_helper (ver fretes)

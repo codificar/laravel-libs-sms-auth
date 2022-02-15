@@ -1,10 +1,16 @@
 {
     "name": "codificar/sms-auth",
     "description": "Permite cadastro e login via sms",
-    "authors": [{
-        "name": "Álvaro Tavares",
-        "email": "libs@codificar.com.br"
-    }],
+    "authors": [
+        {
+            "name": "Álvaro Tavares",
+            "email": "libs@codificar.com.br"
+        },
+        {
+            "name": "Raphael Canguçu",
+            "email": "raphael.cangucu@codificar.com.br"
+        }
+    ],
     "require": {
         "matthewbdaly/laravel-sms": "^1.0"
      },
@@ -12,5 +18,32 @@
         "psr-4": {
             "Codificar\\Sms\\": "src/"
         }
-    }
+    },
+    "repositories": [
+        {
+          "type": "package",
+          "package": {
+            "name": "codificar/sms-auth",
+            "version": "master",
+            "source": {
+              "url": "https://libs:ofImhksJ@git.codificar.com.br/laravel-libs/laravel-toll.git",
+              "type": "git",
+              "reference": "master"
+            }
+          }
+        }
+    ],
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Codificar\\Sms\\SmsServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev" 
 }
