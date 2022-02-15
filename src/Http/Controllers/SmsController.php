@@ -17,7 +17,6 @@ use Codificar\Sms\Http\Resources\LoginBySmsForUserResource;
 use Codificar\Sms\Http\Resources\SmsCodeForUserResource;
 
 
-use SMS;
 use Codificar\Sms\Models\SmsCode;
 use Settings;
 
