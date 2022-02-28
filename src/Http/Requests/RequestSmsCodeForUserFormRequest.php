@@ -30,18 +30,17 @@ class RequestSmsCodeForUserFormRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'phone' => 'required'
+			'phone' => 'required',
+			'user' => 'required'
 		];
 	}
 
 	protected function prepareForValidation()
 	{		
 		$phone = $this->phone;
-		$user = User::getByPhone($phone);
-		$this->user = $user;
-
+		$this->user = User::getByPhone($phone);
 		$this->merge([
-			'user' => $user
+			'user' => $this->user
 		]);
 	}
 	

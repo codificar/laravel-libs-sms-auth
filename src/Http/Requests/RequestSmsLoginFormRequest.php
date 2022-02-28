@@ -29,7 +29,8 @@ class RequestSmsLoginFormRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'phone' => 'required'
+			'phone' => 'required',
+			'provider' => 'required'
 		];
 	}
 
@@ -42,4 +43,26 @@ class RequestSmsLoginFormRequest extends FormRequest
 			'provider' => $provider
 		]);
 	}
+
+	/**
+     * Caso a validação falhe, retorna os itens de erro
+     * 
+     * @return Json
+     */
+    protected function failedValidation(Validator $validator) 
+    {   
+        // Pega as mensagens de erro     
+        $error_messages = $validator->errors()->all();
+
+        // Exibe os parâmetros de erro
+        throw new HttpResponseException(
+        response()->json(
+            [
+                'success' => false,
+                'error' => $error_messages[0],
+                'error_code' => \ApiErrors::REQUEST_FAILED,
+                'error_messages' => $error_messages,
+            ]
+        ));
+    }
 }
