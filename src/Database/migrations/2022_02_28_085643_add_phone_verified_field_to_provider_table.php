@@ -13,9 +13,11 @@ class AddPhoneVerifiedFieldToProviderTable extends Migration
      */
     public function up()
     {
-        Schema::table('provider', function (Blueprint $table) {
-            $table->boolean('phone_verified')->after('phone')->default(false);
-        });
+        if (!Schema::hasColumn('provider', 'phone_verified')) {
+            Schema::table('provider', function (Blueprint $table) {
+                $table->boolean('phone_verified')->after('phone')->default(false);
+            });
+        }
     }
 
     /**
