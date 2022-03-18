@@ -27,8 +27,10 @@ class AddPhoneVerifiedFieldToProviderTable extends Migration
      */
     public function down()
     {
-        Schema::table('provider', function (Blueprint $table) {
-			$table->dropColumn('phone_verified');
-        });
+        if (Schema::hasColumn('provider', 'phone_verified')) {
+            Schema::table('provider', function (Blueprint $table) {
+                $table->dropColumn('phone_verified');
+            });
+        }
     }
 }
