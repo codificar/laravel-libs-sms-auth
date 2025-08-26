@@ -10,48 +10,48 @@ use User;
 
 class RequestSmsCodeForUserFormRequest extends FormRequest
 {
-	private $user;
+    private $user;
 
-	/**
-	 * Determine if the user is authorized to make this request.
-	 *
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return true;
-	}
+    public function authorize()
+    {
+        return true;
+    }
 
-	/**
-	 * Get the validation rules that apply to the request.
-	 *
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-			'phone' => 'required',
-			'user' => 'required'
-		];
-	}
+    public function rules()
+    {
+        return [
+            // validação em E.164 (+244..., +55..., etc.)
+            'phone' => ['required', 'regex:/^\+[1-9]\d{7,14}$/'],
+            // ATENÇÃO: 'user' não é mais obrigatório
+            // aqui 'user' é um *model* (preenchido no prepareForValidation), então apenas 'nullable'
+            'user'  => ['nullable'],
+        ];
+    }
 
-	protected function prepareForValidation()
-	{		
-		$phone = $this->phone;
-		$this->user = User::getByPhone($phone);
-		$this->merge([
-			'user' => $this->user
-		]);
-	}
-	
-	protected function failedValidation(Validator $validator) {
+    protected function prepareForValidation()
+    {
+        // normaliza o phone (remove espaços, (), - ; mantém '+')
+        $rawPhone = (string) $this->phone;
+        $phone = preg_replace('/[^\d\+]+/', '', $rawPhone);
+        $this->merge(['phone' => $phone]);
+
+        // busca o usuário por telefone; se não existir, permanece null (e tudo bem)
+        $this->user = User::getByPhone($phone);
+
+        // mantém a mesma interface esperada pelo controller/resource
+        $this->merge([
+            'user' => $this->user
+        ]);
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
         throw new HttpResponseException(
-        response()->json(
-            [
-                'success' => false,
-                'errors' => $validator->errors()->all(),
+            response()->json([
+                'success'    => false,
+                'errors'     => $validator->errors()->all(),
                 'error_code' => \ApiErrors::REQUEST_FAILED
-            ]
-        ));
+            ])
+        );
     }
 }
